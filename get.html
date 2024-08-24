@@ -38,11 +38,12 @@
         }
 
         input[type="number"] {
-            width: calc(100% - 20px);
+            width: 100%;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 10px;
+            box-sizing: border-box; /* Ensures padding does not exceed container width */
         }
 
         button {
@@ -65,7 +66,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            display: none;
+            display: none; /* Hide table initially */
         }
 
         th,
@@ -94,7 +95,7 @@
 
         @media (max-width: 480px) {
             .container {
-                width: 100%;
+                width: 90%;
                 margin: 20px auto;
                 padding: 10px;
             }
@@ -118,30 +119,26 @@
 
             table {
                 font-size: 14px;
-            }
-        }
-
-        /* Responsive table */
-        @media (max-width: 480px) {
-            table {
-                display: block;
+                display: none; /* Keep table hidden on small screens initially */
                 overflow-x: auto;
                 white-space: nowrap;
             }
 
-            th,
-            td {
-                text-align: center;
-                display: inline-block;
-                width: 100%;
-                box-sizing: border-box;
+            th {
+                display: none; /* Hide the table header on mobile */
             }
 
-            th {
-                background-color: #007bff;
-                color: #fff;
+            td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
                 text-align: center;
             }
+        }
+
+        /* Show table header when table is visible */
+        .table-visible th {
+            display: table-cell;
         }
     </style>
 </head>
@@ -258,7 +255,9 @@
 
             tableBody.appendChild(row);
 
-            document.getElementById("students_table").style.display = "table";
+            var table = document.getElementById("students_table");
+            table.style.display = "table";
+            table.classList.add('table-visible');
         }
 
         function displayAllStudents(students) {
@@ -291,7 +290,9 @@
                 tableBody.appendChild(row);
             });
 
-            document.getElementById("students_table").style.display = "table";
+            var table = document.getElementById("students_table");
+            table.style.display = "table";
+            table.classList.add('table-visible');
         }
     </script>
 </body>

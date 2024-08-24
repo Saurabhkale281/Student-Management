@@ -104,6 +104,22 @@
                 padding: 15px 30px;
                 font-size: 18px;
             }
+
+            .gender-group {
+                display: flex;
+                align-items: center;
+            }
+
+            .gender-container {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 10px; /* Reduced gap */
+            }
+
+            .gender-group label {
+                margin-bottom: 0;
+            }
         }
 
         @media (min-width: 481px) and (max-width: 1024px) {
@@ -136,13 +152,29 @@
                 padding: 12px 20px;
                 font-size: 16px;
             }
+
+            .gender-group {
+                display: flex;
+                align-items: center;
+            }
+
+            .gender-container {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 5px; /* Reduced gap */
+            }
+
+            .gender-group label {
+                margin-bottom: 0;
+            }
         }
 
-        @media (min-width: 320px) and (max-width: 480px) {
+        @media (max-width: 480px) {
             .container {
-                width: 90%;
-                margin: 20px auto;
-                padding: 15px;
+                width: 95%;
+                margin: 10px auto;
+                padding: 10px;
             }
 
             h1 {
@@ -156,8 +188,9 @@
 
             label {
                 flex: 1 0 100%;
-                margin-bottom: 10px;
-                font-size: 14px;
+                margin-bottom: 5px;
+                font-size: 12px; /* Reduced font size for mobile */
+                text-align: left;
             }
 
             input[type="text"],
@@ -167,12 +200,36 @@
             select {
                 width: 100%;
                 font-size: 14px;
+                padding: 8px;
             }
 
             button {
                 width: 100%;
                 padding: 10px;
-                font-size: 16px;
+                font-size: 14px;
+            }
+
+            .gender-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .gender-container {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 5px; /* Reduced gap */
+                margin-top: 5px;
+            }
+
+            .gender-group input[type="radio"] {
+                margin-right: 3px; /* Reduced margin for mobile */
+            }
+
+            .gender-group label {
+                font-size: 12px; /* Smaller font size for mobile */
             }
         }
     </style>
@@ -203,14 +260,16 @@
                 <label for="mobile_no">Mobile No:</label>
                 <input type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" required>
             </div>
-            <div class="form-group">
+            <div class="form-group gender-group">
                 <label>Gender:</label>
-                <input type="radio" id="male" name="gender" value="male" required>
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="female" required>
-                <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="other" required>
-                <label for="other">Other</label>
+                <div class="gender-container">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="other" required>
+                    <label for="other">Other</label>
+                </div>
             </div>
             <button type="button" onclick="updateStudent()">Update</button>
         </form>
