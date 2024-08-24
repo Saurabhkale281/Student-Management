@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        label {
+            flex: 0 0 100px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: medium;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Media Queries */
+
+        @media (min-width: 1024px) {
+            .container {
+                width: 60%;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .form-group {
+                flex-direction: row;
+            }
+
+            label {
+                font-size: 18px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            select {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .container {
+                width: 80%;
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .form-group {
+                flex-direction: row;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            select {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                flex: 1 0 100%;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            select {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            button {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = './login.html';
+        }
+    </script>
+    <div class="container">
+        <h1>Add Student</h1>
+        <form id="addStudentForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile_no">Mobile No:</label>
+                <input type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other" required>
+                <label for="other">Other</label>
+            </div>
+            <button type="button" onclick="addStudent()">Add</button>
+        </form>
+    </div>
+
+    <script>
+        function addStudent() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mobileNo = document.getElementById("mobile_no").value;
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+
+            var student = {
+                name: name,
+                email: email,
+                mobileNo: mobileNo,
+                gender: gender
+            };
+
+            fetch('http://studentmanagement1-production.up.railway.app/api/students/addStudent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(student)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Student ID: ' + data.id + '\n' + data.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while adding the student.');
+                });
+        }
+    </script>
+</body>
+
+</html>
