@@ -118,7 +118,7 @@
 
             var studentId = document.getElementById("student_id").value;
 
-            fetch('http://studentmanagement1-production.up.railway.app/api/students/deleteStudent/' + studentId, {
+            fetch('https://studentmanagement1-production.up.railway.app/api/students/deleteStudent/' + studentId, {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
