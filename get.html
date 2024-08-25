@@ -43,7 +43,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 10px;
-            box-sizing: border-box; /* Ensures padding does not exceed container width */
+            box-sizing: border-box;
         }
 
         button {
@@ -54,7 +54,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            width: 100%; /* Adjust button width for full width */
+            width: 100%;
             font-size: medium;
         }
 
@@ -62,15 +62,18 @@
             background-color: #0056b3;
         }
 
+        .table-container {
+            overflow-x: auto; /* Enables horizontal scrolling */
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
             display: none; /* Hide table initially */
         }
 
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -93,15 +96,14 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 683px) {
             .container {
                 width: 90%;
                 margin: 50px auto;
                 padding: 10px;
             }
 
-            label,
-            input[type="number"] {
+            label, input[type="number"] {
                 width: 100%;
                 margin-bottom: 10px;
             }
@@ -111,28 +113,20 @@
                 font-size: 16px;
             }
 
-            th,
-            td {
+            th, td {
                 font-size: 14px;
                 padding: 6px;
             }
 
+            .table-container {
+                overflow-x: auto; /* Keep overflow on smaller screens */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            }
+
             table {
                 font-size: 14px;
-                display: none; /* Keep table hidden on small screens initially */
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            th {
-                display: none; /* Hide the table header on mobile */
-            }
-
-            td {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
-                text-align: center;
+                display: none; /* Display table on small screens */
+                white-space: nowrap; /* Prevent text wrapping to make horizontal scrolling */
             }
         }
 
@@ -140,7 +134,7 @@
         .table-visible th {
             display: table-cell;
         }
-        
+
     </style>
 </head>
 
@@ -164,20 +158,22 @@
         </div>
         <button onclick="getAllStudents()">Get All Students</button>
 
-        <table id="students_table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Mobile No</th>
-                    <th>Gender</th>
-                </tr>
-            </thead>
-            <tbody id="students_table_body">
-                <!-- Table rows will be dynamically populated -->
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table id="students_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile No</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody id="students_table_body">
+                    <!-- Table rows will be dynamically populated -->
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
         function getStudentById() {
