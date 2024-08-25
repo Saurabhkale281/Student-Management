@@ -23,6 +23,7 @@
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: -10vh; /* Reduces the top margin */
         }
 
         h1 {
@@ -69,6 +70,7 @@
             .container {
                 width: 400px;
                 padding: 30px;
+                margin-top: -5vh; /* Slightly reduce the top margin for larger screens */
             }
 
             h1 {
@@ -90,6 +92,7 @@
                 width: 80%;
                 max-width: 400px;
                 padding: 25px;
+                margin-top: -8vh; /* Adjust the top margin for tablets */
             }
 
             h1 {
@@ -106,11 +109,11 @@
             }
         }
 
-        @media (min-width: 320px) and (max-width: 480px) {
+        @media (max-width: 480px) {
             .container {
                 width: 90%;
                 padding: 15px;
-                margin: 0 auto;
+                margin-top: -20vh; /* Further reduce the top margin for small screens */
             }
 
             h1 {

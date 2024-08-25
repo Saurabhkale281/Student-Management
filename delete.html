@@ -25,7 +25,7 @@
         h1 {
             text-align: center;
             color: #333;
-            font-size: 24px; /* Adjust font size for better readability */
+            font-size: 24px;
         }
 
         .form-group {
@@ -64,8 +64,16 @@
         /* Media Queries */
         @media (max-width: 768px) {
             .container {
-                width: 90%;
+                width: 80%; /* Reduce container width */
                 padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px; /* Adjust font size for better readability */
+            }
+
+            input[type="number"] {
+                padding: 8px; /* Reduce padding for input field */
             }
 
             input[type="submit"] {
@@ -74,17 +82,21 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (min-width: 320px) and (max-width: 480px){
             .container {
-                width: 100%;
-                margin: 20px auto;
+                width: 90%; /* Further reduce container width for small screens */
+                margin: 200px auto;
                 padding: 10px;
             }
 
-            label,
+            label {
+                font-size: 14px; /* Adjust label font size for mobile */
+            }
+
             input[type="number"] {
-                width: 100%;
-                margin-bottom: 10px;
+                width: calc(100% - 16px); /* Reduce input field width */
+                padding: 8px; /* Further reduce padding for input field */
+                font-size: 14px; /* Adjust font size for input on mobile */
             }
 
             input[type="submit"] {
