@@ -179,7 +179,7 @@
         function getStudentById() {
             var studentId = document.getElementById("student_id").value;
 
-            fetch('https://student-management1.vercel.app/api/students/getStudent/' + studentId)
+            fetch('https://studentmanagement1.onrender.com/api/students/getStudent/' + studentId)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -201,7 +201,7 @@
         }
 
         function getAllStudents() {
-            fetch('https://student-management1.vercel.app/api/students/getStudentList')
+            fetch('https://studentmanagement1.onrender.com/api/students/getStudentList')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
